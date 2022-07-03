@@ -16,19 +16,3 @@ resource "aws_s3_bucket_public_access_block" "lambda_bucket" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
-
-data "archive_file" "lambda_hello" {
-  type = "zip"
-
-  source_dir  = "../${path.module}/hello"
-  output_path = "../${path.module}/hello.zip"
-}
-
-resource "aws_s3_object" "lambda_hello" {
-  bucket = aws_s3_bucket.lambda_bucket.id
-
-  key    = "hello.zip"
-  source = data.archive_file.lambda_hello.output_path
-
-  etag = filemd5(data.archive_file.lambda_hello.output_path)
-}

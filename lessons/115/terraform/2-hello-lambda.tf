@@ -41,3 +41,19 @@ resource "aws_cloudwatch_log_group" "hello" {
 
   retention_in_days = 14
 }
+
+data "archive_file" "lambda_hello" {
+  type = "zip"
+
+  source_dir  = "../${path.module}/hello"
+  output_path = "../${path.module}/hello.zip"
+}
+
+resource "aws_s3_object" "lambda_hello" {
+  bucket = aws_s3_bucket.lambda_bucket.id
+
+  key    = "hello.zip"
+  source = data.archive_file.lambda_hello.output_path
+
+  etag = filemd5(data.archive_file.lambda_hello.output_path)
+}
