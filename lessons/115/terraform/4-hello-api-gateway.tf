@@ -7,17 +7,17 @@ resource "aws_apigatewayv2_integration" "lambda_hello" {
 }
 
 resource "aws_apigatewayv2_route" "get_hello" {
-  api_id = aws_apigatewayv2_api.lambda.id
+  api_id = aws_apigatewayv2_api.main.id
 
   route_key = "GET /hello"
-  target    = "integrations/${aws_apigatewayv2_integration.hello.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_hello.id}"
 }
 
 resource "aws_apigatewayv2_route" "post_hello" {
-  api_id = aws_apigatewayv2_api.lambda.id
+  api_id = aws_apigatewayv2_api.main.id
 
   route_key = "POST /hello"
-  target    = "integrations/${aws_apigatewayv2_integration.hello.id}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_hello.id}"
 }
 
 resource "aws_lambda_permission" "api_gw" {

@@ -24,6 +24,6 @@ aws s3api get-bucket-acl --bucket lambda-arriving-roughy
 curl -X POST \
 -H "Content-Type: application/json" \
 -d '{"name":"Anton"}' \
-"https://o85efccvy7.execute-api.us-east-1.amazonaws.com/dev/hello"
+"https://mfdvou6o7h.execute-api.us-east-1.amazonaws.com/dev/hello"
 
-curl "https://o85efccvy7.execute-api.us-east-1.amazonaws.com/dev/hello?Name=Anton"
+curl "https://mfdvou6o7h.execute-api.us-east-1.amazonaws.com/dev/Anton"
