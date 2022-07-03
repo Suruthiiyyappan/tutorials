@@ -1,5 +1,5 @@
-resource "aws_iam_role" "lambda_exec" {
-  name = "lambda"
+resource "aws_iam_role" "hello_lambda_exec" {
+  name = "hello-lambda"
 
   assume_role_policy = <<POLICY
 {
@@ -17,8 +17,8 @@ resource "aws_iam_role" "lambda_exec" {
 POLICY
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_policy" {
-  role       = aws_iam_role.lambda_exec.name
+resource "aws_iam_role_policy_attachment" "hello_lambda_policy" {
+  role       = aws_iam_role.hello_lambda_exec.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
@@ -33,7 +33,7 @@ resource "aws_lambda_function" "hello" {
 
   source_code_hash = data.archive_file.lambda_hello.output_base64sha256
 
-  role = aws_iam_role.lambda_exec.arn
+  role = aws_iam_role.hello_lambda_exec.arn
 }
 
 resource "aws_cloudwatch_log_group" "hello" {

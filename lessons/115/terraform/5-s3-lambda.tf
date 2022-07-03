@@ -1,43 +1,43 @@
-resource "aws_iam_role" "lambda_exec" {
-  name = "lambda"
+# resource "aws_iam_role" "s3_lambda_exec" {
+#   name = "s3-lambda"
 
-  assume_role_policy = <<POLICY
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "lambda.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }
-  ]
-}
-POLICY
-}
+#   assume_role_policy = <<POLICY
+# {
+#   "Version": "2012-10-17",
+#   "Statement": [
+#     {
+#       "Effect": "Allow",
+#       "Principal": {
+#         "Service": "lambda.amazonaws.com"
+#       },
+#       "Action": "sts:AssumeRole"
+#     }
+#   ]
+# }
+# POLICY
+# }
 
-resource "aws_iam_role_policy_attachment" "lambda_policy" {
-  role       = aws_iam_role.lambda_exec.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
-}
+# resource "aws_iam_role_policy_attachment" "s3_lambda_policy" {
+#   role       = aws_iam_role.s3_lambda_exec.name
+#   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+# }
 
-resource "aws_lambda_function" "hello" {
-  function_name = "hello"
+# resource "aws_lambda_function" "s3" {
+#   function_name = "s3"
 
-  s3_bucket = aws_s3_bucket.lambda_bucket.id
-  s3_key    = aws_s3_object.lambda_hello.key
+#   s3_bucket = aws_s3_bucket.lambda_bucket.id
+#   s3_key    = aws_s3_object.lambda_s3.key
 
-  runtime = "nodejs16.x"
-  handler = "function.handler"
+#   runtime = "nodejs16.x"
+#   handler = "function.handler"
 
-  source_code_hash = data.archive_file.lambda_hello.output_base64sha256
+#   source_code_hash = data.archive_file.lambda_s3.output_base64sha256
 
-  role = aws_iam_role.lambda_exec.arn
-}
+#   role = aws_iam_role.s3_lambda_exec.arn
+# }
 
-resource "aws_cloudwatch_log_group" "hello" {
-  name = "/aws/lambda/${aws_lambda_function.hello.function_name}"
+# resource "aws_cloudwatch_log_group" "s3" {
+#   name = "/aws/lambda/${aws_lambda_function.s3.function_name}"
 
-  retention_in_days = 14
-}
+#   retention_in_days = 14
+# }
