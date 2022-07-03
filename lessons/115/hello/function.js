@@ -6,6 +6,11 @@ exports.handler = async (event) => {
         responseMessage = 'Hello, ' + event.queryStringParameters['Name'] + '!';
     }
 
+    if (event.httpMethod === 'POST') {
+        const body = JSON.parse(event.body);
+        responseMessage = 'Hello, ' + body.name + '!';
+    }
+
     const response = {
         statusCode: 200,
         headers: {

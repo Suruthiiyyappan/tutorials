@@ -17,4 +17,7 @@
 aws lambda invoke --region=us-east-1 --function-name=HelloWorld response.json
 cat response.json
 
-curl -d "{'test':'some'}" "https://tbli6zg4uk.execute-api.us-east-1.amazonaws.com/serverless_lambda_stage/hello"
+curl -X POST \
+-H "Content-Type: application/json" \
+-d "{'name':'Anton'}" \
+"https://tbli6zg4uk.execute-api.us-east-1.amazonaws.com/serverless_lambda_stage/hello"

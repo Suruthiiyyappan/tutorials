@@ -36,7 +36,7 @@ resource "aws_apigatewayv2_integration" "hello_world" {
   integration_method = "POST"
 }
 
-resource "aws_apigatewayv2_route" "hello_world" {
+resource "aws_apigatewayv2_route" "get_hello_world" {
   api_id = aws_apigatewayv2_api.lambda.id
 
   route_key = "GET /hello"
@@ -51,7 +51,7 @@ resource "aws_apigatewayv2_route" "post_hello_world" {
 }
 
 resource "aws_cloudwatch_log_group" "api_gw" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.lambda.name}"
+  name = "/api-gw/${aws_apigatewayv2_api.lambda.name}"
 
   retention_in_days = 14
 }
