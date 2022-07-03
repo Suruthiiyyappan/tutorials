@@ -1,5 +1,5 @@
 resource "random_pet" "lambda_bucket_name" {
-  prefix = "functions"
+  prefix = "lambda"
   length = 2
 }
 
@@ -10,18 +10,18 @@ resource "aws_s3_bucket" "lambda_bucket" {
   force_destroy = true
 }
 
-data "archive_file" "lambda_hello_world" {
+data "archive_file" "lambda_hello" {
   type = "zip"
 
-  source_dir  = "../${path.module}/hello-world"
-  output_path = "${path.module}/hello-world.zip"
+  source_dir  = "../${path.module}/hello"
+  output_path = "../${path.module}/hello.zip"
 }
 
-resource "aws_s3_object" "lambda_hello_world" {
+resource "aws_s3_object" "lambda_hello" {
   bucket = aws_s3_bucket.lambda_bucket.id
 
-  key    = "hello-world.zip"
-  source = data.archive_file.lambda_hello_world.output_path
+  key    = "hello.zip"
+  source = data.archive_file.lambda_hello.output_path
 
-  etag = filemd5(data.archive_file.lambda_hello_world.output_path)
+  etag = filemd5(data.archive_file.lambda_hello.output_path)
 }
