@@ -20,6 +20,6 @@ resource "aws_s3_bucket_public_access_block" "test" {
 resource "aws_s3_object" "test" {
   bucket = aws_s3_bucket.test.id
 
-  key    = "hello.json"
-  content = jsonencode({name = "S3"})
+  key     = "hello.json"
+  content = jsonencode({ name = "S3" })
 }

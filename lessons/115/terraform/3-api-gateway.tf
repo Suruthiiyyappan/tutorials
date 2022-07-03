@@ -1,10 +1,16 @@
+resource "aws_cloudwatch_log_group" "api_gw" {
+  name = "/aws/api_gw/${aws_apigatewayv2_api.main.name}"
+
+  retention_in_days = 14
+}
+
 resource "aws_apigatewayv2_api" "main" {
   name          = "main"
   protocol_type = "HTTP"
 }
 
 resource "aws_apigatewayv2_stage" "dev" {
-  api_id = aws_apigatewayv2_api.api.id
+  api_id = aws_apigatewayv2_api.main.id
 
   name        = "dev"
   auto_deploy = true
@@ -28,8 +34,10 @@ resource "aws_apigatewayv2_stage" "dev" {
   }
 }
 
+# Integrate with Hello Lambda Function
+
 resource "aws_apigatewayv2_integration" "lambda_hello" {
-  api_id = aws_apigatewayv2_api.api.id
+  api_id = aws_apigatewayv2_api.main.id
 
   integration_uri    = aws_lambda_function.hello.invoke_arn
   integration_type   = "AWS_PROXY"
@@ -48,12 +56,6 @@ resource "aws_apigatewayv2_route" "post_hello" {
 
   route_key = "POST /hello"
   target    = "integrations/${aws_apigatewayv2_integration.hello.id}"
-}
-
-resource "aws_cloudwatch_log_group" "api_gw" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.main.name}"
-
-  retention_in_days = 14
 }
 
 resource "aws_lambda_permission" "api_gw" {
