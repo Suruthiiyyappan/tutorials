@@ -29,7 +29,7 @@ resource "aws_lambda_function" "hello" {
   s3_key    = aws_s3_object.lambda_hello.key
 
   runtime = "nodejs16.x"
-  handler = "hello.handler"
+  handler = "function.handler"
 
   source_code_hash = data.archive_file.lambda_hello.output_base64sha256
 
