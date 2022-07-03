@@ -28,9 +28,4 @@ curl -X POST \
 
 curl "https://lhoc4mvmch.execute-api.us-east-1.amazonaws.com/dev/hello?Name=Anton"
 
-
-npm init
-
-npm install aws-sdk
-
-npm ci
+chmod +x ./build-s3-lambda.sh
