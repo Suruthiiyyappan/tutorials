@@ -51,7 +51,7 @@ resource "aws_apigatewayv2_route" "post_hello" {
 }
 
 resource "aws_cloudwatch_log_group" "api_gw" {
-  name = "/api-gw/${aws_apigatewayv2_api.lambda.name}"
+  name = "/aws/api_gw/${aws_apigatewayv2_api.lambda.name}"
 
   retention_in_days = 14
 }

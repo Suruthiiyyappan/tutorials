@@ -37,7 +37,7 @@ resource "aws_lambda_function" "hello" {
 }
 
 resource "aws_cloudwatch_log_group" "hello" {
-  name = "/lambda/${aws_lambda_function.hello.function_name}"
+  name = "/aws/lambda/${aws_lambda_function.hello.function_name}"
 
   retention_in_days = 14
 }

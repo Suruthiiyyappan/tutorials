@@ -19,5 +19,5 @@ cat response.json
 
 curl -X POST \
 -H "Content-Type: application/json" \
--d "{'name':'Anton'}" \
+-d '{"name":"Anton"}' \
 "https://8sv5p1nkc9.execute-api.us-east-1.amazonaws.com/dev/hello"
