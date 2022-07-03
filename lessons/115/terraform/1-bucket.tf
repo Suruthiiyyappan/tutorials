@@ -4,13 +4,17 @@ resource "random_pet" "lambda_bucket_name" {
 }
 
 resource "aws_s3_bucket" "lambda_bucket" {
-  bucket = random_pet.lambda_bucket_name.id
+  bucket        = random_pet.lambda_bucket_name.id
   force_destroy = true
 }
 
-resource "aws_s3_bucket_acl" "lambda_bucket_acl" {
+resource "aws_s3_bucket_public_access_block" "lambda_bucket" {
   bucket = aws_s3_bucket.lambda_bucket.id
-  acl    = "private"
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 data "archive_file" "lambda_hello" {
