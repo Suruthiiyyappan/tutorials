@@ -1,9 +1,3 @@
-resource "aws_cloudwatch_log_group" "main_api_gw" {
-  name = "/aws/api_gw/${aws_apigatewayv2_api.main.name}"
-
-  retention_in_days = 14
-}
-
 resource "aws_apigatewayv2_api" "main" {
   name          = "main"
   protocol_type = "HTTP"
@@ -32,4 +26,10 @@ resource "aws_apigatewayv2_stage" "dev" {
       }
     )
   }
+}
+
+resource "aws_cloudwatch_log_group" "main_api_gw" {
+  name = "/aws/api_gw/${aws_apigatewayv2_api.main.name}"
+
+  retention_in_days = 14
 }
