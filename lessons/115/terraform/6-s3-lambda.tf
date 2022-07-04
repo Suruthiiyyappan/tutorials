@@ -76,6 +76,6 @@ resource "aws_s3_object" "lambda_s3" {
 
   key    = "s3.zip"
   source = data.archive_file.lambda_s3.output_path
-
-  etag = filemd5(data.archive_file.lambda_s3.output_path)
+  
+  source_hash = filemd5(data.archive_file.lambda_s3.output_path)
 }
