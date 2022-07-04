@@ -15,7 +15,7 @@
 
 
 
-aws lambda invoke --region=us-east-1 --function-name=HelloWorld response.json
+aws lambda invoke --region=us-east-1 --function-name=hello response.json
 cat response.json
 
 
@@ -24,8 +24,14 @@ aws s3api get-bucket-acl --bucket lambda-arriving-roughy
 curl -X POST \
 -H "Content-Type: application/json" \
 -d '{"name":"Anton"}' \
-"https://lhoc4mvmch.execute-api.us-east-1.amazonaws.com/dev/hello"
+"https://wlvsq7js9i.execute-api.us-east-1.amazonaws.com/dev/hello"
 
-curl "https://lhoc4mvmch.execute-api.us-east-1.amazonaws.com/dev/hello?Name=Anton"
+curl "https://wlvsq7js9i.execute-api.us-east-1.amazonaws.com/dev/hello?Name=Anton"
 
-chmod +x ./build-s3-lambda.sh
+chmod +x ./terraform.sh
+
+aws lambda invoke --region=us-east-1 --function-name=s3 --cli-binary-format raw-in-base64-out --payload '{"bucket": "test-rich-buck","object": "hello.json"}' response.json
+
+
+Error:
+Make sure they exist and your bucket is in the same region as this function.","trace":["Error: Error getting object hello.json from bucket test-rich-buck. Make sure they exist and your bucket is in the same region as this function
