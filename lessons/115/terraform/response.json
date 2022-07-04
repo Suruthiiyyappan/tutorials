@@ -1,1 +1,1 @@
-{"errorType":"Error","errorMessage":"Error getting object hello.json from bucket test-rich-buck. Make sure they exist and your bucket is in the same region as this function.","trace":["Error: Error getting object hello.json from bucket test-rich-buck. Make sure they exist and your bucket is in the same region as this function.","    at Runtime.exports.handler (/var/task/function.js:31:15)","    at processTicksAndRejections (node:internal/process/task_queues:96:5)"]}
+"{\"name\":\"S3\"}"

@@ -22,7 +22,7 @@ resource "aws_iam_role_policy_attachment" "s3_lambda_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
-resource "aws_iam_policy" "test-s3-bucket-access" {
+resource "aws_iam_policy" "test_s3_bucket_access" {
   name        = "TestS3BucketAccess"
 
   policy = jsonencode({
@@ -37,6 +37,11 @@ resource "aws_iam_policy" "test-s3-bucket-access" {
       },
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "s3_lambda_test_s3_bucket_access" {
+  role       = aws_iam_role.s3_lambda_exec.name
+  policy_arn = aws_iam_policy.test_s3_bucket_access.arn
 }
 
 resource "aws_lambda_function" "s3" {
