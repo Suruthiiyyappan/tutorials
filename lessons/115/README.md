@@ -35,3 +35,14 @@ aws lambda invoke --region=us-east-1 --function-name=s3 --cli-binary-format raw-
 
 Error:
 Make sure they exist and your bucket is in the same region as this function.","trace":["Error: Error getting object hello.json from bucket test-rich-buck. Make sure they exist and your bucket is in the same region as this function
+
+
+
+
+
+
+
+
+## Create Lambda Function Using Terraform
+## Create API Gateway Using Terraform
+## Create Lambda Function with Dependencies & Access to S3 Bucket
