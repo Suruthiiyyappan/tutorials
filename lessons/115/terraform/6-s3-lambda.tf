@@ -42,19 +42,11 @@ resource "aws_cloudwatch_log_group" "s3" {
   retention_in_days = 14
 }
 
-resource "null_resource" "s3_lambda" {
-  provisioner "local-exec" {
-    command = "./build-s3-lambda.sh"
-  }
-}
-
 data "archive_file" "lambda_s3" {
   type = "zip"
 
   source_dir  = "../${path.module}/s3"
   output_path = "../${path.module}/s3.zip"
-
-  depends_on = [null_resource.s3_lambda]
 }
 
 resource "aws_s3_object" "lambda_s3" {
@@ -64,6 +56,4 @@ resource "aws_s3_object" "lambda_s3" {
   source = data.archive_file.lambda_s3.output_path
 
   etag = filemd5(data.archive_file.lambda_s3.output_path)
-
-  depends_on = [null_resource.s3_lambda]
 }
